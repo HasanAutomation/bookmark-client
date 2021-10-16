@@ -7,8 +7,9 @@ const api = axios.create({
 });
 
 const apiCalls = {
-  createBookmark: body => api.post('/bookmarks', body),
+  createBookmarkApi: body => api.post('/bookmarks', body),
   getBookmarks: () => api.get('/bookmarks'),
+  deleteBookmarkApi: id => api.delete(`/bookmarks/${id}`),
 };
 
 export default apiCalls;

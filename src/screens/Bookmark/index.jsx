@@ -40,6 +40,9 @@ function Bookmark() {
         <div className='bookmark-form'>
           <AddBookmark />
         </div>
+        <br />
+        <br />
+        <br />
         <div className='bookmark-list'>
           {loading ? <h3>Loading...</h3> : showBookmarks()}
         </div>
