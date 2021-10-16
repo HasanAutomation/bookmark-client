@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   bookmarks: [],
+  bookmark: {},
 };
 
 const bookmarkSlice = createSlice({
@@ -20,9 +21,25 @@ const bookmarkSlice = createSlice({
       );
       state.bookmarks = newBookMarks;
     },
+    setBookmark: (state, action) => {
+      state.bookmark = action.payload;
+    },
+    updateBookmark: (state, action) => {
+      const updatedBookmarks = state.bookmarks.map(bookmark =>
+        bookmark._id === action.payload.id
+          ? { ...bookmark, ...action.payload.data.data }
+          : bookmark
+      );
+      state.bookmarks = updatedBookmarks;
+    },
   },
 });
 
-export const { setBookmarks, getBookmarks, deleteBookmark } =
-  bookmarkSlice.actions;
+export const {
+  setBookmarks,
+  getBookmarks,
+  deleteBookmark,
+  setBookmark,
+  updateBookmark,
+} = bookmarkSlice.actions;
 export default bookmarkSlice.reducer;

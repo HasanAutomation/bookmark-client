@@ -1,0 +1,36 @@
+.card-form {
+  font-weight: 200;
+  padding: 10px;
+  .header {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 100;
+    margin: 0;
+  }
+  form {
+    padding: 10px;
+    width: 90%;
+    input {
+      width: 100%;
+      margin-bottom: 10px;
+      outline: none;
+      border: none;
+      padding: 8px 10px;
+      background-color: #f8f4f4;
+      border-radius: 7px;
+      color: black;
+      font-size: 17px;
+    }
+
+    button {
+      padding: 8px 20px;
+      border-radius: 7px;
+      background-color: limegreen;
+      color: white;
+      outline: none;
+      border: none;
+      cursor: pointer;
+      margin: 0 4px;
+    }
+  }
+}
