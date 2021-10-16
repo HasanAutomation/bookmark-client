@@ -1,0 +1,38 @@
+.link {
+  padding: 14px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: all 1s ease-in-out;
+
+  &:hover {
+    .right {
+      display: flex;
+    }
+  }
+  .right {
+    display: none;
+    .content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      i {
+        margin: 0 4px;
+      }
+    }
+  }
+  a {
+    text-decoration: none;
+    h4 {
+      padding: 0;
+      margin: 0;
+    }
+  }
+}
+
+.bookmark {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  //   align-items: center;
+}
