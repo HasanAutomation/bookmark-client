@@ -10,7 +10,7 @@ const bookmarkSlice = createSlice({
   initialState,
   reducers: {
     setBookmarks: (state, action) => {
-      state.bookmarks.push(action.payload.data);
+      state.bookmarks.unshift(action.payload.data);
     },
     getBookmarks: (state, action) => {
       state.bookmarks = action.payload.data.data;

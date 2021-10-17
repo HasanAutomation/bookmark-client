@@ -36,3 +36,17 @@
   justify-content: center;
   //   align-items: center;
 }
+
+.actions {
+  button {
+    background-color: #1d1d1d;
+    color: white;
+    padding: 6px 14px;
+    margin-right: 5px;
+    cursor: pointer;
+
+    &:disabled {
+      cursor: no-drop;
+    }
+  }
+}

@@ -9,7 +9,7 @@ function BookmarkItem({ bookmark }) {
   const history = useHistory();
 
   const handleDelete = id => {
-    removeBookmark(id, dispatch);
+    if (window.confirm('Are you sure?')) removeBookmark(id, dispatch);
   };
   const handleEdit = id => {
     history.push(`/bookmarks/${id}`);
