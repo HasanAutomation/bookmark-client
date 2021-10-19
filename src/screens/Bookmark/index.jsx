@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import AddBookmark from '../../components/AddBookmark';
+import { useHistory } from 'react-router-dom';
 import BookmarkItem from '../../components/BookmarkItem';
 import { getBookmarks } from '../../redux/slices/bookmarkSlice';
 import apiCalls from '../../utils/api';
@@ -12,15 +12,23 @@ function Bookmark() {
   const [loading, setLoading] = useState(false);
   const [apiResponse, setApiResponse] = useState({});
   const dispatch = useDispatch();
+  const history = useHistory();
 
   function showBookmarks() {
-    if (bookmarks.length === 0) return <h3>No bookmarks!Add one</h3>;
-    const newBookmarks = [...bookmarks];
-
-    let newArrayList =
-      newBookmarks.length > 5 ? newBookmarks.splice(0, 5) : newBookmarks;
-
-    return newArrayList.map(bookmark => (
+    if (bookmarks.length === 0)
+      return (
+        <div>
+          <h4
+            style={{
+              color: 'gray',
+              fontWeight: 100,
+            }}
+          >
+            No Bookmarks added! Add one
+          </h4>
+        </div>
+      );
+    return bookmarks.map(bookmark => (
       <BookmarkItem bookmark={bookmark} key={`Item-${bookmark._id}`} />
     ));
   }
@@ -57,14 +65,11 @@ function Bookmark() {
   }, []);
 
   return (
-    <div className='container'>
+    <>
+      <button className='add' onClick={() => history.push('/add')}>
+        Add
+      </button>
       <div className='bookmark'>
-        <div className='bookmark-form'>
-          <AddBookmark />
-        </div>
-        <br />
-        <br />
-        <br />
         <div className='bookmark-list'>
           {loading ? <h3>Loading...</h3> : showBookmarks()}
         </div>
@@ -95,7 +100,7 @@ function Bookmark() {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 }
 

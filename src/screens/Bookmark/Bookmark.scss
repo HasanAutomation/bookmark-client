@@ -36,10 +36,19 @@
   justify-content: center;
   //   align-items: center;
 }
+.add {
+  background-color: limegreen;
+  color: white;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
 
 .actions {
   button {
-    background-color: #1d1d1d;
+    background-color: limegreen;
     color: white;
     padding: 6px 14px;
     margin-right: 5px;

@@ -12,4 +12,6 @@ body {
   width: 700px;
   margin: 0 auto;
   max-width: 90%;
+  padding: 20px;
+  padding-top: 0;
 }
