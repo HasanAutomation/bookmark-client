@@ -1,7 +1,8 @@
 import axios from 'axios';
 import storage from './storage';
 
-export const baseURL = 'http://localhost:5000/api/v1';
+// export const baseURL = 'http://localhost:5000/api/v1';
+export const baseURL = 'https://bookmark-web-api.herokuapp.com/api/v1';
 
 const api = axios.create({
   baseURL,
