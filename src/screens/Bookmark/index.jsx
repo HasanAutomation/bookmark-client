@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -33,17 +33,20 @@ function Bookmark() {
     ));
   }
 
-  const fetchBookmarks = async page => {
-    try {
-      setLoading(true);
-      const { data } = await apiCalls.getBookmarks(page);
-      setApiResponse(data);
-      dispatch(getBookmarks({ data }));
-      setLoading(false);
-    } catch (err) {
-      setLoading(false);
-    }
-  };
+  const fetchBookmarks = useCallback(
+    async page => {
+      try {
+        setLoading(true);
+        const { data } = await apiCalls.getBookmarks(page);
+        setApiResponse(data);
+        dispatch(getBookmarks({ data }));
+        setLoading(false);
+      } catch (err) {
+        setLoading(false);
+      }
+    },
+    [dispatch]
+  );
 
   const onNext = () => {
     fetchBookmarks(
@@ -61,8 +64,9 @@ function Bookmark() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchBookmarks(1);
-  }, []);
+  }, [fetchBookmarks]);
 
   return (
     <>

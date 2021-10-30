@@ -35,20 +35,20 @@ function EditBookmark() {
     enhanceBookmark(params.id, { title, link }, dispatch, alert);
   };
 
-  const fetchBookmark = async () => {
-    try {
-      const { data } = await apiCalls.getBookmark(params.id);
-      dispatch(setBookmark(data.data));
-      setLoading(false);
-    } catch (err) {
-      console.log(err.response.data.error);
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchBookmark = async () => {
+      try {
+        const { data } = await apiCalls.getBookmark(params.id);
+        dispatch(setBookmark(data.data));
+        setLoading(false);
+      } catch (err) {
+        console.log(err.response.data.error);
+        setLoading(false);
+      }
+    };
+
     fetchBookmark();
-  }, [params.id]);
+  }, [params.id, dispatch]);
 
   if (loading) return <h4>Loading....</h4>;
 
