@@ -18,7 +18,7 @@ function BookmarkItem({ bookmark }) {
   return (
     <Card>
       <div className='link'>
-        <a href={bookmark.link} target='_blank'>
+        <a href={bookmark.link} target='_blank' rel='noreferrer'>
           <h4>{bookmark.title}</h4>
         </a>
         <div className='right'>
