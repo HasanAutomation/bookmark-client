@@ -6,8 +6,6 @@
     font-size: 22px;
     font-weight: 100;
     margin: 0;
-    font-weight: 100;
-    color: gray;
   }
   form {
     padding: 10px;
@@ -32,6 +30,7 @@
       outline: none;
       border: none;
       cursor: pointer;
+      font-weight: bold;
     }
   }
 }

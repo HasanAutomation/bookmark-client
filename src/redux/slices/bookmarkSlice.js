@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   bookmarks: [],
   bookmark: {},
+  loading: false,
 };
 
 const bookmarkSlice = createSlice({
@@ -11,7 +12,15 @@ const bookmarkSlice = createSlice({
   reducers: {
     setBookmarks: (state, action) => {
       state.bookmarks.unshift(action.payload.data);
+      state.loading = false;
     },
+    setLoading: (state, action) => {
+      state.loading = true;
+    },
+    setLoadingFalse: (state, action) => {
+      state.loading = false;
+    },
+
     getBookmarks: (state, action) => {
       state.bookmarks = action.payload.data.data;
     },
@@ -41,5 +50,7 @@ export const {
   deleteBookmark,
   setBookmark,
   updateBookmark,
+  setLoading,
+  setLoadingFalse,
 } = bookmarkSlice.actions;
 export default bookmarkSlice.reducer;

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useAlert } from 'react-alert';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { createBookmark } from '../../redux/actions/bookmarkActions';
 import Card from '../Card';
 import './AddBookmark.scss';
@@ -7,12 +9,16 @@ import './AddBookmark.scss';
 function AddBookmark() {
   const [title, setTitle] = useState('');
   const [link, setLink] = useState('');
+  const { loading } = useSelector(state => state.bookmark);
+
+  const alert = useAlert();
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const onSubmit = e => {
     e.preventDefault();
-    createBookmark({ title, link }, dispatch);
+    createBookmark({ title, link }, dispatch, history, alert);
     setTitle('');
     setLink('');
   };
@@ -21,7 +27,7 @@ function AddBookmark() {
     <Card>
       <div className='card-form'>
         <h3 className='header'>Add Bookmark</h3>
-        <form onSubmit={onSubmit}>
+        <form>
           <input
             type='text'
             placeholder='Enter a title'
@@ -34,7 +40,8 @@ function AddBookmark() {
             value={link}
             onChange={e => setLink(e.target.value)}
           />
-          <button type='submit'>Save</button>
+          <button onClick={onSubmit}>{loading ? '.....' : 'Save'}</button>
+          <button onClick={() => history.push('/bookmarks')}>Back</button>
         </form>
       </div>
     </Card>

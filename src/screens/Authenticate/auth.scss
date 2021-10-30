@@ -1,0 +1,16 @@
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+
+  p {
+    font-size: 19px;
+    font-weight: 100;
+    color: gray;
+    span {
+      cursor: pointer;
+    }
+  }
+}

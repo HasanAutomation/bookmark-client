@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useAlert } from 'react-alert';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
@@ -14,6 +15,7 @@ function EditBookmark() {
   const bookmark = useSelector(state =>
     state.bookmark.bookmarks.find(book => book._id === params.id)
   );
+  const { loading: loadingUpdate } = useSelector(state => state.bookmark);
 
   const bookmarkObj = useSelector(state => state.bookmark.bookmark);
 
@@ -24,11 +26,13 @@ function EditBookmark() {
   );
   const [link, setLink] = useState(bookmark?.link || bookmarkObj.link || '');
 
+  const alert = useAlert();
+
   const dispatch = useDispatch();
 
   const onSubmit = e => {
     e.preventDefault();
-    enhanceBookmark(params.id, { title, link }, dispatch);
+    enhanceBookmark(params.id, { title, link }, dispatch, alert);
   };
 
   const fetchBookmark = async () => {
@@ -44,10 +48,6 @@ function EditBookmark() {
 
   useEffect(() => {
     fetchBookmark();
-    // return () => {
-    //   setTitle('');
-    //   setLink('');
-    // };
   }, [params.id]);
 
   if (loading) return <h4>Loading....</h4>;
@@ -69,7 +69,9 @@ function EditBookmark() {
             value={link}
             onChange={e => setLink(e.target.value)}
           />
-          <button onClick={e => onSubmit(e)}>Update</button>
+          <button onClick={e => onSubmit(e)}>
+            {loadingUpdate ? '...' : 'Update'}
+          </button>
           <Link to='/bookmarks'>
             <button>Back</button>
           </Link>
