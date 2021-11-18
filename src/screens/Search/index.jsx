@@ -1,27 +1,25 @@
-import React, { useEffect, useState, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation } from 'react-router-dom';
 import BookmarkList from '../../components/BookmarksList';
 import Pagination from '../../components/Pagination';
-import SearchBar from '../../components/SearchBar';
 import Spinner from '../../components/Spinner';
 import { getBookmarks } from '../../redux/slices/bookmarkSlice';
 import apiCalls from '../../utils/api';
-import './Bookmark.scss';
 
-function Bookmark() {
+export default function Search() {
   const { bookmarks } = useSelector(state => state.bookmark);
   const [loading, setLoading] = useState(false);
   const [apiResponse, setApiResponse] = useState({});
   const dispatch = useDispatch();
-  const history = useHistory();
+
+  const queryString = useLocation().search;
 
   const fetchBookmarks = useCallback(
-    async page => {
+    async (page, name) => {
       try {
         setLoading(true);
-        const { data } = await apiCalls.getBookmarks(page);
+        const { data } = await apiCalls.getBookmarks(page, name);
         setApiResponse(data);
         dispatch(getBookmarks({ data }));
         setLoading(false);
@@ -33,23 +31,20 @@ function Bookmark() {
   );
 
   useEffect(() => {
-    fetchBookmarks(1);
-  }, [fetchBookmarks]);
+    fetchBookmarks(1, queryString.split('=')[1]);
+  }, [fetchBookmarks, queryString]);
+
+  if (loading) return <Spinner />;
 
   return (
-    <>
-      <div className='bookmark-header'>
-        <button className='add' onClick={() => history.push('/add')}>
-          Add
-        </button>
-        <SearchBar />
-      </div>
+    <div>
+      <h4 className='info'>Search includes "{queryString.split('=')[1]}"</h4>
+      {bookmarks.length > 0 ? (
+        <BookmarkList bookmarks={bookmarks} />
+      ) : (
+        <h4 className='error'>No Matched found</h4>
+      )}
 
-      <div className='bookmark'>
-        <div className='bookmark-list'>
-          {loading ? <Spinner /> : <BookmarkList bookmarks={bookmarks} />}
-        </div>
-      </div>
       {((apiResponse &&
         apiResponse.pagination &&
         apiResponse.pagination.next) ||
@@ -58,8 +53,6 @@ function Bookmark() {
           apiResponse.pagination.prev)) && (
         <Pagination apiResponse={apiResponse} fetchBookmarks={fetchBookmarks} />
       )}
-    </>
+    </div>
   );
 }
-
-export default Bookmark;

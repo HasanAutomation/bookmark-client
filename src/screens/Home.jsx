@@ -4,6 +4,7 @@ import EditBookmark from '../components/EditBookmark';
 import Navbar from '../components/Navbar';
 import PrivateRoute from '../components/routes/PrivateRoute';
 import Bookmark from './Bookmark';
+import Search from './Search';
 
 function Home() {
   return (
@@ -14,6 +15,9 @@ function Home() {
       </PrivateRoute>
       <PrivateRoute exact path='/add'>
         <AddBookmark />
+      </PrivateRoute>
+      <PrivateRoute path='/search'>
+        <Search />
       </PrivateRoute>
       <PrivateRoute path='/bookmarks/:id'>
         <EditBookmark />

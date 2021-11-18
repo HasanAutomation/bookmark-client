@@ -1,3 +1,9 @@
+.bookmark-header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  justify-content: space-between;
+}
 .link {
   padding: 14px 10px;
   display: flex;
@@ -44,18 +50,4 @@
   cursor: pointer;
   border: none;
   outline: none;
-}
-
-.actions {
-  button {
-    background-color: limegreen;
-    color: white;
-    padding: 6px 14px;
-    margin-right: 5px;
-    cursor: pointer;
-
-    &:disabled {
-      cursor: no-drop;
-    }
-  }
 }

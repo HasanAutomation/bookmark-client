@@ -1,8 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap');
 body {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
   background: #f8f4f4;
+  font-family: 'Roboto', sans-serif;
 }
 .App {
   height: 100vh;
@@ -14,4 +16,12 @@ body {
   max-width: 90%;
   padding: 20px;
   padding-top: 0;
+}
+.error {
+  color: gray;
+  font-weight: 100;
+}
+.info {
+  font-size: 1.2rem;
+  color: gray;
 }
