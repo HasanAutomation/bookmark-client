@@ -6,6 +6,7 @@ import useLoadingWithRefresh from './hooks/useLoadingWithRefresh';
 import Home from './screens/Home';
 import { positions, Provider } from 'react-alert';
 import AlertTemplate from 'react-alert-template-basic';
+import Spinner from './components/Spinner';
 
 const options = {
   timeout: 5000,
@@ -15,19 +16,7 @@ const options = {
 function App() {
   const { loading } = useLoadingWithRefresh();
 
-  if (loading)
-    return (
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: '100vh',
-        }}
-      >
-        <h3>Loading app..</h3>
-      </div>
-    );
+  if (loading) return <Spinner />;
 
   return (
     <Provider template={AlertTemplate} {...options}>

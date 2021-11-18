@@ -21,7 +21,8 @@ api.interceptors.request.use(
 
 const apiCalls = {
   createBookmarkApi: body => api.post('/bookmarks', body),
-  getBookmarks: page => api.get(`/bookmarks/?page=${page}`),
+  getBookmarks: (page, name = null) =>
+    api.get(`/bookmarks/?page=${page}${name && `&name=${name}`}`),
   deleteBookmarkApi: id => api.delete(`/bookmarks/${id}`),
   getBookmark: id => api.get(`/bookmarks/${id}`),
   updateBookmark: (id, body) => api.put(`/bookmarks/${id}`, body),
